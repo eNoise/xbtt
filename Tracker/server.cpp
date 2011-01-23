@@ -855,7 +855,7 @@ std::string Cserver::statistics() const
 	os << "<head>\n";
 	os << "<title>Uruchie Tracker</title>\n";
 	os << "<meta http-equiv=\"refresh\" content=\"60\" />\n";
-	os << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />";
+	os << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
 	os << "<meta name=\"description\" content=\"Статистика трекера уручья\" />\n";
 	os << "<meta name=\"keywords\" content=\"torrent, tracker, статистика, уручье\" />\n";
 	os << "</head>\n";
