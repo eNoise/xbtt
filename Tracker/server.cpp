@@ -853,9 +853,9 @@ std::string Cserver::statistics() const
 	std::ostringstream os;
 	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n";
 	os << "<head>\n";
+	os << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
 	os << "<title>Uruchie Tracker</title>\n";
 	os << "<meta http-equiv=\"refresh\" content=\"60\" />\n";
-	os << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
 	os << "<meta name=\"description\" content=\"Статистика трекера уручья\" />\n";
 	os << "<meta name=\"keywords\" content=\"torrent, tracker, статистика, уручье\" />\n";
 	os << "</head>\n";
