@@ -862,7 +862,7 @@ std::string Cserver::statistics() const
 		torrents += i.second.leechers || i.second.seeders;
 	}
 	time_t t = time();
-	os << "<table>"
+	os << "<table>\n"
 		<< "<tr><td>leechers</td><td align=right>" << leechers << "</td></tr>\n"
 		<< "<tr><td>seeders</td><td align=right>" << seeders << "</td></tr>\n"
 		<< "<tr><td>peers</td><td align=right>" << leechers + seeders << "</td></tr>\n"
