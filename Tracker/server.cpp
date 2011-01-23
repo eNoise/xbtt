@@ -851,7 +851,7 @@ std::string Cserver::debug(const Ctracker_input& ti) const
 std::string Cserver::statistics() const
 {
 	std::ostringstream os;
-	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"><meta http-equiv=refresh content=60>\n<title>Uruchie Tracker</title>\n";
+	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n<meta http-equiv=\"refresh\" content=\"60\">\n<title>Uruchie Tracker</title>\n";
 	int leechers = 0;
 	int seeders = 0;
 	int torrents = 0;
@@ -862,7 +862,7 @@ std::string Cserver::statistics() const
 		torrents += i.second.leechers || i.second.seeders;
 	}
 	time_t t = time();
-	os << "<img src=\"http://files.uruchie.org/~DEg/images/torrent.png\" border=\"0\" /><br />\n";
+	os << "<center><img src=\"http://files.uruchie.org/~DEg/images/torrent.png\" border=\"0\" /></center><br />\n";
 	os << "<table>\n"
 		<< "<tr><td><font color=\"blue\">leechers</font></td><td align=right><font color=\"blue\"><b>" << leechers << "</b></font></td></tr>\n"
 		<< "<tr><td><font color=\"green\">seeders</font></td><td align=right><font color=\"green\"><b>" << seeders << "</b></font></td></tr>\n"
