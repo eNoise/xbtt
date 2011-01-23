@@ -882,7 +882,7 @@ std::string Cserver::statistics() const
 		os << "<tr><td>scraped http</td><td align=right>" << m_stats.scraped_http << "</td><td align=right>" << m_stats.scraped_http * 100 / m_stats.scraped() << " %" << "</td></tr>\n"
 			<< "<tr><td>scraped udp</td><td align=right>" << m_stats.scraped_udp << "</td><td align=right>" << m_stats.scraped_udp * 100 / m_stats.scraped() << " %" << "</td></tr>\n";
 	}
-	os << "<tr><td>"
+	os
 		<< "<tr><td>up time</td><td align=right>" << duration2a(time() - m_stats.start_time) << "</td></tr>\n"
 		<< "<tr><td>anonymous connect</td><td align=right>" << m_config.m_anonymous_connect << "</td></tr>\n"
 		<< "<tr><td>anonymous announce</td><td align=right>" << m_config.m_anonymous_announce << "</td></tr>\n"
