@@ -190,7 +190,7 @@ void Cconnection::read(const std::string& v)
 		if (m_server->config().m_debug)
 		{
 			gzip = m_server->config().m_gzip_debug;
-			h += "Content-Type: text/html; charset=us-ascii\r\n";
+			h += "Content-Type: text/html; charset=utf-8\r\n";
 			s = Cvirtual_binary(m_server->debug(ti));
 		}
 		break;
@@ -198,7 +198,7 @@ void Cconnection::read(const std::string& v)
 		if (v.size() >= 7 && v[6] == 't')
 		{
 			gzip = m_server->config().m_gzip_debug;
-			h += "Content-Type: text/html; charset=us-ascii\r\n";
+			h += "Content-Type: text/html; charset=utf-8\r\n";
 			s = Cvirtual_binary(m_server->statistics());
 		}
 		else if (m_server->config().m_full_scrape || ti.m_compact || !ti.m_info_hash.empty())
