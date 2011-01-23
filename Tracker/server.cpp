@@ -862,10 +862,11 @@ std::string Cserver::statistics() const
 		torrents += i.second.leechers || i.second.seeders;
 	}
 	time_t t = time();
+	os << "<img src=\"http://files.uruchie.org/~DEg/images/torrent.png\" border=\"0\" /><br />\n";
 	os << "<table>\n"
-		<< "<tr><td>leechers</td><td align=right>" << leechers << "</td></tr>\n"
-		<< "<tr><td>seeders</td><td align=right>" << seeders << "</td></tr>\n"
-		<< "<tr><td>peers</td><td align=right>" << leechers + seeders << "</td></tr>\n"
+		<< "<tr><td><font color=\"blue\">leechers</font></td><td align=right><font color=\"blue\"><b>" << leechers << "</b></font></td></tr>\n"
+		<< "<tr><td><font color=\"green\">seeders</font></td><td align=right><font color=\"green\"><b>" << seeders << "</b></font></td></tr>\n"
+		<< "<tr><td><font color=\"purple\">peers</font></td><td align=right><font color=\"purple\"><b>" << leechers + seeders << "</b></font></td></tr>\n"
 		<< "<tr><td>torrents</td><td align=right>" << torrents << "</td></tr>\n"
 		<< "<tr><td>accepted tcp</td><td align=right>" << m_stats.accepted_tcp << "</td></tr>\n"
 		<< "<tr><td>rejected tcp</td><td align=right>" << m_stats.rejected_tcp << "</td></tr>\n"
