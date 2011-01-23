@@ -851,7 +851,8 @@ std::string Cserver::debug(const Ctracker_input& ti) const
 std::string Cserver::statistics() const
 {
 	std::ostringstream os;
-	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n";
+	os << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n";
+	os << "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
 	os << "<head>\n";
 	os << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
 	os << "<title>Uruchie Tracker</title>\n";
@@ -909,6 +910,7 @@ std::string Cserver::statistics() const
 	}
 	os << "</table>";
 	os << "</body>\n";
+	os << "</html>\n";
 	return os.str();
 }
 
