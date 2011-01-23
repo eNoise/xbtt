@@ -851,7 +851,7 @@ std::string Cserver::debug(const Ctracker_input& ti) const
 std::string Cserver::statistics() const
 {
 	std::ostringstream os;
-	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n<meta http-equiv=\"refresh\" content=\"60\">\n<title>Uruchie Tracker</title>\n";
+	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n<meta http-equiv=\"refresh\" content=\"60\" />\n<title>Uruchie Tracker</title>\n";
 	int leechers = 0;
 	int seeders = 0;
 	int torrents = 0;
