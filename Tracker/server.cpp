@@ -851,7 +851,14 @@ std::string Cserver::debug(const Ctracker_input& ti) const
 std::string Cserver::statistics() const
 {
 	std::ostringstream os;
-	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n<meta http-equiv=\"refresh\" content=\"60\" />\n<title>Uruchie Tracker</title>\n";
+	os << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">\n";
+	os << "<head>\n";
+	os << "<title>Uruchie Tracker</title>\n";
+	os << "<meta http-equiv=\"refresh\" content=\"60\" />\n";
+	os << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />";
+	os << "<meta name=\"description\" content=\"Статистика трекера уручья\" />\n";
+	os << "<meta name=\"keywords\" content=\"torrent, tracker, статистика, уручье\" />\n";
+	os << "</head>\n";
 	int leechers = 0;
 	int seeders = 0;
 	int torrents = 0;
@@ -862,44 +869,46 @@ std::string Cserver::statistics() const
 		torrents += i.second.leechers || i.second.seeders;
 	}
 	time_t t = time();
+	os << "<body>\n";
 	os << "<center><img src=\"http://files.uruchie.org/~DEg/images/torrent.png\" border=\"0\" /></center><br />\n";
 	os << "<table>\n"
-		<< "<tr><td><font color=\"blue\">leechers</font></td><td align=right><font color=\"blue\"><b>" << leechers << "</b></font></td></tr>\n"
-		<< "<tr><td><font color=\"green\">seeders</font></td><td align=right><font color=\"green\"><b>" << seeders << "</b></font></td></tr>\n"
-		<< "<tr><td><font color=\"purple\">peers</font></td><td align=right><font color=\"purple\"><b>" << leechers + seeders << "</b></font></td></tr>\n"
-		<< "<tr><td>torrents</td><td align=right>" << torrents << "</td></tr>\n"
-		<< "<tr><td>accepted tcp</td><td align=right>" << m_stats.accepted_tcp << "</td></tr>\n"
-		<< "<tr><td>rejected tcp</td><td align=right>" << m_stats.rejected_tcp << "</td></tr>\n"
-		<< "<tr><td>announced</td><td align=right>" << m_stats.announced() << "</td></tr>\n";
+		<< "<tr><td><font color=\"blue\">Личеров</font></td><td align=right><font color=\"blue\"><b>" << leechers << "</b></font></td></tr>\n"
+		<< "<tr><td><font color=\"green\">Сидеров</font></td><td align=right><font color=\"green\"><b>" << seeders << "</b></font></td></tr>\n"
+		<< "<tr><td><font color=\"purple\">Пиров</font></td><td align=right><font color=\"purple\"><b>" << leechers + seeders << "</b></font></td></tr>\n"
+		<< "<tr><td>Торрентов</td><td align=right>" << torrents << "</td></tr>\n"
+		<< "<tr><td>Принятых TCP соединений</td><td align=right>" << m_stats.accepted_tcp << "</td></tr>\n"
+		<< "<tr><td>Отвергнутых TCP соединений</td><td align=right>" << m_stats.rejected_tcp << "</td></tr>\n"
+		<< "<tr><td>Анонсов торрентов</td><td align=right>" << m_stats.announced() << "</td></tr>\n";
 	if (m_stats.announced())
 	{
-		os << "<tr><td>announced http</td><td align=right>" << m_stats.announced_http << "</td><td align=right>" << m_stats.announced_http * 100 / m_stats.announced() << " %" << "</td></tr>\n"
-			<< "<tr><td>announced udp</td><td align=right>" << m_stats.announced_udp << "</td><td align=right>" << m_stats.announced_udp * 100 / m_stats.announced() << " %" << "</td></tr>\n";
+		os << "<tr><td>Анонсов через http</td><td align=right>" << m_stats.announced_http << "</td><td align=right>" << m_stats.announced_http * 100 / m_stats.announced() << " %" << "</td></tr>\n"
+			<< "<tr><td>Анонсов через udp</td><td align=right>" << m_stats.announced_udp << "</td><td align=right>" << m_stats.announced_udp * 100 / m_stats.announced() << " %" << "</td></tr>\n";
 	}
-	os << "<tr><td>scraped full</td><td align=right>" << m_stats.scraped_full << "</td></tr>\n"
-		<< "<tr><td>scraped</td><td align=right>" << m_stats.scraped() << "</td></tr>\n";
+	os << "<tr><td>Всего заскробленно</td><td align=right>" << m_stats.scraped_full << "</td></tr>\n"
+		<< "<tr><td>Заскробленно</td><td align=right>" << m_stats.scraped() << "</td></tr>\n";
 	if (m_stats.scraped())
 	{
-		os << "<tr><td>scraped http</td><td align=right>" << m_stats.scraped_http << "</td><td align=right>" << m_stats.scraped_http * 100 / m_stats.scraped() << " %" << "</td></tr>\n"
-			<< "<tr><td>scraped udp</td><td align=right>" << m_stats.scraped_udp << "</td><td align=right>" << m_stats.scraped_udp * 100 / m_stats.scraped() << " %" << "</td></tr>\n";
+		os << "<tr><td>Заскробленно через http</td><td align=right>" << m_stats.scraped_http << "</td><td align=right>" << m_stats.scraped_http * 100 / m_stats.scraped() << " %" << "</td></tr>\n"
+			<< "<tr><td>Заскробленно через udp</td><td align=right>" << m_stats.scraped_udp << "</td><td align=right>" << m_stats.scraped_udp * 100 / m_stats.scraped() << " %" << "</td></tr>\n";
 	}
 	os
-		<< "<tr><td>up time</td><td align=right>" << duration2a(time() - m_stats.start_time) << "</td></tr>\n"
-		<< "<tr><td>anonymous connect</td><td align=right>" << m_config.m_anonymous_connect << "</td></tr>\n"
-		<< "<tr><td>anonymous announce</td><td align=right>" << m_config.m_anonymous_announce << "</td></tr>\n"
-		<< "<tr><td>anonymous scrape</td><td align=right>" << m_config.m_anonymous_scrape << "</td></tr>\n"
-		<< "<tr><td>auto register</td><td align=right>" << m_config.m_auto_register << "</td></tr>\n"
-		<< "<tr><td>full scrape</td><td align=right>" << m_config.m_full_scrape << "</td></tr>\n"
-		<< "<tr><td>read config time</td><td align=right>" << t - m_read_config_time << " / " << m_config.m_read_config_interval << "</td></tr>\n"
-		<< "<tr><td>clean up time</td><td align=right>" << t - m_clean_up_time << " / " << m_config.m_clean_up_interval << "</td></tr>\n"
-		<< "<tr><td>read db files time</td><td align=right>" << t - m_read_db_files_time << " / " << m_config.m_read_db_interval << "</td></tr>\n";
+		<< "<tr><td>Uptime трекера</td><td align=right>" << duration2a(time() - m_stats.start_time) << "</td></tr>\n"
+		<< "<tr><td>Анонимных соединений</td><td align=right>" << m_config.m_anonymous_connect << "</td></tr>\n"
+		<< "<tr><td>Анонивных анонсов</td><td align=right>" << m_config.m_anonymous_announce << "</td></tr>\n"
+		<< "<tr><td>Анонимный скроблинг</td><td align=right>" << m_config.m_anonymous_scrape << "</td></tr>\n"
+		<< "<tr><td>Авто-регистрация</td><td align=right>" << m_config.m_auto_register << "</td></tr>\n"
+		<< "<tr><td>Полный скроблинг</td><td align=right>" << m_config.m_full_scrape << "</td></tr>\n"
+		<< "<tr><td>Время считывания конфига</td><td align=right>" << t - m_read_config_time << " / " << m_config.m_read_config_interval << "</td></tr>\n"
+		<< "<tr><td>Время чистки базы</td><td align=right>" << t - m_clean_up_time << " / " << m_config.m_clean_up_interval << "</td></tr>\n"
+		<< "<tr><td>Время считывания файлов из базы</td><td align=right>" << t - m_read_db_files_time << " / " << m_config.m_read_db_interval << "</td></tr>\n";
 	if (m_use_sql)
 	{
-		os << "<tr><td>read db users time</td><td align=right>" << t - m_read_db_users_time << " / " << m_config.m_read_db_interval << "</td></tr>\n"
-			<< "<tr><td>write db files time</td><td align=right>" << t - m_write_db_files_time << " / " << m_config.m_write_db_interval << "</td></tr>\n"
-			<< "<tr><td>write db users time</td><td align=right>" << t - m_write_db_users_time << " / " << m_config.m_write_db_interval << "</td></tr>\n";
+		os << "<tr><td>Время считывания пользователей из базы</td><td align=right>" << t - m_read_db_users_time << " / " << m_config.m_read_db_interval << "</td></tr>\n"
+			<< "<tr><td>Время записи файлов в базу</td><td align=right>" << t - m_write_db_files_time << " / " << m_config.m_write_db_interval << "</td></tr>\n"
+			<< "<tr><td>Время записи пользователей в базу</td><td align=right>" << t - m_write_db_users_time << " / " << m_config.m_write_db_interval << "</td></tr>\n";
 	}
 	os << "</table>";
+	os << "</body>\n";
 	return os.str();
 }
 
